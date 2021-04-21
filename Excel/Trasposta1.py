@@ -1,17 +1,28 @@
 import pandas as pd
+import numpy as np
 
 # Carica il file dalla stessa directory di Python
 df = pd.read_excel('..\Excel\Michelet.xlsx', sheet_name='Sheet1')
 
 # Traspone la tabella convertendola in formato xlsx
-df.T.to_excel('Out.xlsx', index= False)
+Trans = df.T
 
-# Rilegge il file appena creato in modo tale da poterlo modificare in locale sottoforma di dataframe
-dft = pd.read_excel('Out.xlsx')
+Trans.replace('Codice', 'CODICE', regex=True, inplace=True)
 
+Trans.to_excel('Out2.xlsx')
 
-dft.replace('Codice', 'CODICE', regex=True, inplace=True)
+# Analisi statistiche automatiche e copia su file excel
+D = Trans.describe()
+D.to_excel('Stat_Analysys.xlsx')
 
-dft.to_excel('Out2.xlsx')
+# Ordina le righe in ordine alfabetico dal basso verso l'alto. Con true fa il contrario
+Ord_righe = Trans.sort_index(axis=0, ascending=False)
 
-print(dft)
+# Ordina le colonne in ordine alfabetico dal basso verso l'alto. Con true fa il contrario
+Ord_colonne = Trans.sort_index(axis=1, ascending=False)
+
+# Seleziona tutte le righe ma solo le prime due colonne (i numeri sono gli indici stampati nella prima riga del file Out2)
+Sel = Trans.loc[:, [0,1]]
+
+print(Sel)
+
