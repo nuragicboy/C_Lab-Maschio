@@ -22,7 +22,7 @@ Ord_righe = Trans.sort_index(axis=0, ascending=False)
 Ord_colonne = Trans.sort_index(axis=1, ascending=False)
 
 # Seleziona tutte le righe ma solo le prime due colonne (i numeri sono gli indici stampati nella prima riga del file Out2)
-Sel = Trans.loc[:, [0,1]]
+Sel = Trans.loc[:, [0,2]]
 
 print(Sel)
 
