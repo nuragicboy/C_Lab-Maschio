@@ -23,6 +23,9 @@ Ord_colonne = Trans.sort_index(axis=1, ascending=False)
 
 # Seleziona tutte le righe ma solo le prime due colonne (i numeri sono gli indici stampati nella prima riga del file Out2)
 Sel = Trans.loc[:, [0,2]]
-
 print(Sel)
+
+# Seleziona un singolo elemento all'interno del DF
+Elem = Trans.iloc[2,3]
+print(Elem)
 
