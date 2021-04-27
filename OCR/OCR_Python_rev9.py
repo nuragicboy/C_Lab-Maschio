@@ -9,8 +9,7 @@ import openpyxl
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 #Ricordati di inserire l'immagine all'interno del progetto Python
-img = cv2.imread("invoice-sample.jpg")
-
+img = cv2.imread("POLO.jpg")
 
 # 2. Ridimensionare l'immagine di output
 img = cv2.resize(img, None, fx=1.6, fy=1.6)
