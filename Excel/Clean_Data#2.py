@@ -15,7 +15,11 @@ T1 = Trans.fillna(value=0.0)
 for i in range(0,len(df),1):
     if T1.iloc[1,i]==0:
         T1.iloc[1,i]=T1.iloc[0,i]
+
+# Elimino prima riga, ormai fotocopia di quella sotto
 T1.drop(T1.index[0:1], inplace=True)
+
+
 T1.to_excel('Michelet#2.xlsx')
 
 
