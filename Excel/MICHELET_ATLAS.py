@@ -42,9 +42,8 @@ F1=json.loads(trans1.to_json(orient='records'))
 ######### MONGO DB #########
 import pymongo
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-
-mydb = myclient["maschio"]
+client = pymongo.MongoClient("mongodb+srv://unza:pass@maschio.y6wmm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+mydb = client["maschio"]
 
 mycol = mydb["analisi"]
 
@@ -52,7 +51,7 @@ mycol = mydb["analisi"]
 x = mycol.insert_many(F1)
 
 
-dblist = myclient.list_database_names()
+dblist = client.list_database_names()
 if "maschio" in dblist:
   print("The database exists.")
 
