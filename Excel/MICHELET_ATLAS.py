@@ -44,7 +44,7 @@ import pymongo
 
 
 
-client = pymongo.MongoClient("mongodb+srv://unza:uCyVDX3ypu7Zilal@maschio.enbsn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://unza:112358@maschio.enbsn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.Analisi
 
 print("connesso in teoria")
@@ -53,3 +53,7 @@ col = db["Michelet"]
 
 #vorrei inserire il file nel DB. Non dà errore ma non riconosce la collection creata
 x = col.insert_many(F1)
+
+Trova=col.find_one({"Codice":"20-LM06395"})
+
+print(Trova)
