@@ -42,20 +42,14 @@ F1=json.loads(trans1.to_json(orient='records'))
 ######### MONGO DB #########
 import pymongo
 
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
 
-mydb = myclient["maschio"]
 
-mycol = mydb["analisi"]
+client = pymongo.MongoClient("mongodb+srv://unza:uCyVDX3ypu7Zilal@maschio.enbsn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+db = client.Analisi
+
+print("connesso in teoria")
+
+col = db["Michelet"]
 
 #vorrei inserire il file nel DB. Non dà errore ma non riconosce la collection creata
-x = mycol.insert_many(F1)
-
-
-dblist = myclient.list_database_names()
-if "maschio" in dblist:
-  print("The database exists.")
-
-collist = mydb.list_collection_names()
-if "analisi" in collist:
-  print("The collection exists.")
+x = col.insert_many(F1)
