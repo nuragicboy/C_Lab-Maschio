@@ -44,12 +44,12 @@ import pymongo
 
 
 
-client = pymongo.MongoClient("mongodb+srv://unza:112358@maschio.enbsn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client = pymongo.MongoClient("mongodb+srv://Albert:112358@maschio.enbsn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
 db = client.Analisi
 
 print("connesso in teoria")
 
-col = db["Michelet"]
+col = db["Michelet#2"]
 
 #vorrei inserire il file nel DB. Non dà errore ma non riconosce la collection creata
 x = col.insert_many(F1)
