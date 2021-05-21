@@ -57,3 +57,16 @@ x = col.insert_many(F1)
 Trova=col.find_one({"Codice":"20-LM06395"})
 
 print(Trova)
+
+result = client['Analisi']['Michelet#2'].aggregate([
+    {
+        '$match': {
+            'Acetaldeide enzimatico mg/l': {
+                '$lt': 70,
+                '$gt': 62
+            }
+        }
+    }
+])
+
+print(result)
