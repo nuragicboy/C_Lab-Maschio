@@ -69,3 +69,4 @@ result = client['Analisi']['Michelet#2'].aggregate([
     }
 ])
 
+# Non da errore ma non so che fine faccia questo filtro -_-
