@@ -1,6 +1,7 @@
 import numpy as np
 import tkinter as tk
 from tkinter import filedialog
+import pandas as pd
 file=''
 
 def FileImport():
@@ -16,4 +17,6 @@ button.pack()
 
 root.mainloop()
 uploaded_file=np.fromfile(file)
-print(uploaded_file)
+
+df = pd.read_excel(file, sheet_name='Sheet1')
+print(df)
