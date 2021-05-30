@@ -1,6 +1,6 @@
 #Aggiungo una riga per permettere l'indicizzazione completa del dataframe
 from openpyxl import load_workbook
-wb = load_workbook('Michelet.xlsx')
+wb = load_workbook('../VERSIONE 1.0/Michelet.xlsx')
 ws = wb.active
 ws.insert_rows(1, amount=1)
 wb.save("Michelet#1.xlsx")

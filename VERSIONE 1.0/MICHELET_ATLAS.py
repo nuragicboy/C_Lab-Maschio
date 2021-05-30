@@ -4,6 +4,8 @@ import pandas as pd
 
 #Faccio la trasposta del dataframe per posizionare gli articoli sulle righe anzichè sulle colonne
 df = pd.read_excel('Michelet.xlsx', sheet_name='Sheet1')
+#SOSTITUISCE I PUNTI COL NULLA NELLA PRIMA COLONNA CHE UNA VOLTA TRASPOSTA DIVENTERà L'INTESTAZIONE
+df['Codice'] = df['Codice'].str.replace('.','')
 trans = df.T
 
 
@@ -25,11 +27,11 @@ trans1.drop(columns, inplace=True, axis=1)
 #Elimino i punti dalle intestazioni altrimenti non possiamo inserire il file nel DB (Andrebbe creato un codice generico e non
 #specifico per l'etichetta (modulo replace)
 
-old_value=[2,3,4,54,55,58,59]
-new_value=["N Vasca","N Lotto","N Partita","calcio limite max sec Ridomi mg/l","potassio ad equilibrio raggiunto sec Ridomi g/l","decremento acidità totale sec Ridomi g/l","pH ad equilibrio raggiunto sec Ridomi"]
+#old_value=[2,3,4,54,55,58,59]
+#new_value=["N Vasca","N Lotto","N Partita","calcio limite max sec Ridomi mg/l","potassio ad equilibrio raggiunto sec Ridomi g/l","decremento acidità totale sec Ridomi g/l","pH ad equilibrio raggiunto sec Ridomi"]
 
-for i in range(0,7,1):
-    trans1.columns.values[old_value[i]]=new_value[i]
+#for i in range(0,7,1):
+    #trans1.columns.values[old_value[i]]=new_value[i]
 
 #Scrivo su file
 trans1.to_excel('Michelet#2.xlsx', header=True)
@@ -51,10 +53,9 @@ print("connesso in teoria")
 
 col = db["Michelet#2"]
 
-#vorrei inserire il file nel DB. Non dà errore ma non riconosce la collection creata
 x = col.insert_many(F1)
 
-Trova=col.find_one({"Codice":"20-LM06395"})
+#Trova=col.find_one({"Codice":"20-LM06395"})
 
 #print(Trova)
 
