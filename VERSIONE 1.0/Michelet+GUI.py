@@ -1,11 +1,31 @@
 import json
-
+import numpy as np
+import tkinter as tk
+from tkinter import filedialog
 import pandas as pd
 
-#Faccio la trasposta del dataframe per posizionare gli articoli sulle righe anzichè sulle colonne
-df = pd.read_excel('Michelet.xlsx', sheet_name='Sheet1')
+#Importo file da interfaccia grafica bruttissima ma funziona
+def FileImport():
+    global file
+    file=filedialog.askopenfilename()
+    label=tk.Label(root, text="SELEZIONARE:"+file).pack()
+
+root=tk.Tk()
+root.title('IMPORT FILE')
+label=tk.Label(root, text="SELEZIONARE FILE:", fg="purple").pack()
+button=tk.Button(root, text='SCEGLI',fg="blue", command=FileImport)
+button.pack()
+
+root.mainloop()
+uploaded_file=np.fromfile(file)
+
+df = pd.read_excel(file, sheet_name='Sheet1')
+
 #SOSTITUISCE I PUNTI COL NULLA NELLA PRIMA COLONNA CHE UNA VOLTA TRASPOSTA DIVENTERà L'INTESTAZIONE
-df['Codice'] = df['Codice'].str.replace('.','')
+
+df['Codice'] = df['Codice'].str.replace('.','',regex=False)
+
+#Faccio la trasposta del dataframe per posizionare gli articoli sulle righe anzichè sulle colonne
 trans = df.T
 
 
