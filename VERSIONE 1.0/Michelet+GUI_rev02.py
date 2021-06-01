@@ -24,7 +24,7 @@ class Application(tk.Frame):
         self.label = tk.Label(root, text="Importare file .xlsx:"+file).pack()
         self.label = tk.Label(root, text="Scegliere File:", fg="purple").pack()
         self.button = tk.Button(root, text='Carica', fg="blue", command=self.import_file)
-        self.button.pack(side="top")
+        self.button.pack()
 
     def import_file(self):
 
