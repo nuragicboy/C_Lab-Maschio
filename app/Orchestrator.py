@@ -4,10 +4,11 @@ class Orchestrator:
     def __init__(self, dataPath, profilePath):
         self.dataPath=dataPath
         self.profile=profilePath
-        self.profile = open(profilePath, "r")
+        self.profile = open(profilePath, "r", encoding="utf-8")
 
 
     def run(self):
+        test=0
         for line in self.profile:
             line = line.rstrip()
 
@@ -26,17 +27,19 @@ class Orchestrator:
 
 
             elif (line == "delcolbyname"):
-                print("delcolbyname")
-                print(self.profile.readline())
+                colname=self.profile.readline().rstrip().split(",")
+                self.excelData = xh.dropColumnsByName(self.excelData, colname)
 
             elif (line == "replacecolumnname"):
-                print("replacecolumnname")
-                print(self.profile.readline())
-                print(self.profile.readline())
-
+                index = self.profile.readline().rstrip().split(",")
+                value = self.profile.readline().rstrip().split(",")
+                self.excelData = xh.renameHeaderByIndex(self.excelData, index, value)
             else:
                 print("oops")
 
+            test+=1
+
+            xh.writeLocal(self.excelData, "michelet"+str(test)+str(line)+".xlsx", "Test/")
 
 
 
