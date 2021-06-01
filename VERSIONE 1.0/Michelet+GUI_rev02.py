@@ -1,4 +1,3 @@
-import datetime
 import json
 import numpy as np
 import tkinter as tk
@@ -7,28 +6,30 @@ import pandas as pd
 import pymongo
 import time
 
-file=''
+file = ''
+
 
 class Application(tk.Frame):
     def __init__(self, master=None):
         super().__init__(master)
-        self.FileImport()
         self.master = master
+        self.file_import()
         self.pack()
         self.create_widgets()
         self.create_widgets2()
         self.Py_Mongo()
 
-    def FileImport(self):
-        #global file
-        self.file = filedialog.askopenfilename()
-        self.label=tk.Label(root, text="Selected:"+file).pack()
-        self.label=tk.Label(root, text="Upload a file:", fg="purple").pack()
-        self.button=tk.Button(root, text='Upload',fg="blue", command=self.FileImport)
+    def file_import(self):
+        # global file
+        self.label = tk.Label(root, text="Importare file .xlsx:"+file).pack()
+        self.label = tk.Label(root, text="Scegliere File:", fg="purple").pack()
+        self.button = tk.Button(root, text='Carica', fg="blue", command=self.import_file)
         self.button.pack(side="top")
 
-        self.uploaded_file = np.fromfile(self.file)
+    def import_file(self):
 
+        self.file = filedialog.askopenfilename()
+        self.uploaded_file = np.fromfile(self.file)
         self.df = pd.read_excel(self.file, sheet_name='Sheet1')
 
     # SOSTITUISCE I PUNTI COL NULLA NELLA PRIMA COLONNA CHE UNA VOLTA TRASPOSTA DIVENTERà L'INTESTAZIONE
@@ -52,15 +53,6 @@ class Application(tk.Frame):
 
         self.columns = ['Attività', 'Attività - Matrice', 'Descrizione', 'Locazione', 'Prodotto', 'Assegnato', 'Stampa']
         self.trans1.drop(self.columns, inplace=True, axis=1)
-
-        # Elimino i punti dalle intestazioni altrimenti non possiamo inserire il file nel DB (Andrebbe creato un codice generico e non
-        # specifico per l'etichetta (modulo replace)
-
-        # old_value=[2,3,4,54,55,58,59]
-        # new_value=["N Vasca","N Lotto","N Partita","calcio limite max sec Ridomi mg/l","potassio ad equilibrio raggiunto sec Ridomi g/l","decremento acidità totale sec Ridomi g/l","pH ad equilibrio raggiunto sec Ridomi"]
-
-        # for i in range(0,7,1):
-        # trans1.columns.values[old_value[i]]=new_value[i]
 
         # Scrivo su file
         self.trans1.to_excel('Michelet#2.xlsx', header=True)
@@ -93,6 +85,7 @@ class Application(tk.Frame):
         self.verifica["text"] = "CONNETTI MONGO"
         self.verifica["command"] = self.Mongo_Connect
         self.verifica.pack(side="bottom")
+
     def Mongo_Connect(self):
         self.x = self.col.insert_many(self.F1)
         print('DATI INSERITI CON SUCCESSO!')
