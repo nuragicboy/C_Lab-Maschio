@@ -1,9 +1,9 @@
-import bf as bf
+import bf
 import cv2
 import numpy as np
 
 cap = cv2.VideoCapture(0)
-imgTarget = cv2.imread('Targetimage.jpg')
+imgTarget = cv2.imread('AR_Test2.jpg')
 myVid = cv2.VideoCapture('Video_Test.mp4')
 
 detection = False
@@ -14,7 +14,7 @@ success, imgVideo = myVid.read()
 hT,wT,cT = imgTarget.shape
 imgVideo = cv2.resize(imgVideo,(wT,hT))
 
-orb = cv2.ORB_create(nfeatures=1000)
+orb = cv2.ORB_create(nfeatures=900)
 kp1, des1 = orb.detectAndCompute(imgTarget, None)
 imgTarget = cv2.drawKeypoints(imgTarget, kp1, None)
 
@@ -76,11 +76,11 @@ while True:
     matches = bf.knnMatch(des1,des2,k=2)
     good =[]
     for m,n in matches:
-        if m.distance < 0.75 *n.distance:
+        if m.distance < 0.9 *n.distance:
             good.append(m)
     print(len(good))
     imgFeatures = cv2.drawMatches(imgTarget, kp1, imgWebcam, kp2, good, None, flags=2)
-    if len(good) > 8:
+    if len(good) > 20:
         detection = True
         srcPts = np.float32([kp1[m.queryIdx].pt for m in good]).reshape(-1, 1, 2)
         dstPts = np.float32([kp2[m.trainIdx].pt for m in good]).reshape(-1, 1, 2)
@@ -101,7 +101,7 @@ while True:
         #
         imgStacked = stackimages(([imgWebcam, imgVideo, imgTarget], [imgFeatures, imgWarp, imgAug]), 0.5)
     #
-        #cv2.imshow('maskNew', imgAug)
+        cv2.imshow('maskNew', imgAug)
         #cv2.imshow('imgWarp', imgWarp)
         #cv2.imshow('img', img2)
         #cv2.imshow('imgFeatures', imgFeatures)
@@ -109,6 +109,6 @@ while True:
         #cv2.imshow('myVid',imgVideo)
         #cv2.imshow('Webcam', imgWebcam)
 
-        cv2.imshow('imgStacked', imgStacked)
+        #cv2.imshow('imgStacked', imgStacked)
         cv2.waitKey(1)
         frameCounter +=1
