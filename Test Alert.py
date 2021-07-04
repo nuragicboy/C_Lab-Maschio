@@ -9,7 +9,7 @@ df.reset_index(inplace=False)
 
 df.to_excel('Vini_Finit#2.xlsx',header=True)
 
-soglia=3.1
+soglia=3.2
 
 for i in range(0,10,1):
     if df.iloc[i,7]<soglia:
@@ -30,7 +30,7 @@ for i in range(0,10,1):
 
         email.login("winenotcantinemaschio@gmail.com", "WineNot2021")
 
-        email.sendmail("winenotcantinemaschio@gmail.com", "alberto.carmignani1@gmail.com", messaggio)
+        email.sendmail("winenotcantinemaschio@gmail.com", "nico.rub96@gmail.com", messaggio)
 
         email.quit()
 
