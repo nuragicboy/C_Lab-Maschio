@@ -20,9 +20,10 @@ for i in range(1,len(df.index),1):
     if df.iloc[i,7]<soglia:
         #print("Indice:"+ str(i)+" "+"Codice:"+str(df.iloc[i,0]))
         parametro="Parametro analizzato : pH"
-        contenuto = "Indice:"+ str(i+1)+"\n"+"Codice:"+str(df.iloc[i,0])
-        valore="Valore:"+str(df.iloc[i,7])+" "+"-"+" "+"Soglia:"+str(soglia)
-        messaggio = messaggio+parametro+"\n"+ contenuto+"\n"+valore+"\n\n"
+        contenuto = "Indice:"+" "+ str(i+1)+"\n"+"Codice:"+" "+str(df.iloc[i,0])
+        valore="Valore:"+" "+str(df.iloc[i,7])+" "+"-"+" "+"Soglia:"+" "+str(soglia)
+        percentuale="Variazione percentuale:"+" "+str(round(((df.iloc[i,7]-soglia)/df.iloc[i,7]*100),2))+" "+"%"
+        messaggio = messaggio+parametro+"\n"+ contenuto+"\n"+valore+"\n"+percentuale+"\n\n"
 
 print(messaggio)
 
