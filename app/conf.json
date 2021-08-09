@@ -1,0 +1,36 @@
+{
+  "ProfileFolder": "./Profiles",
+  "Dictionary": "dictionary.json",
+  "ForceTranslation": true,
+  "RemoteConnections": {
+    "maschio" : {
+      "connectionString": "mongodb+srv://unza:pass@maschio.enbsn.mongodb.net/",
+      "defaultCollection": "Analisi",
+      "parameters": "?retryWrites=true&w=majority",
+      "db": "mongodb",
+      "local": false
+    },
+    "mySQL Local" : {
+      "user": "root",
+      "password": "pass",
+      "host": "127.0.0.1",
+      "port": "3306",
+      "db": "maschio",
+
+      "type": "MySQL",
+      "local": true
+    },
+    "remotemysql" : {
+      "user": "ydlMsejrI5",
+      "password": "iGsB3KcqJ9",
+      "host": "remotemysql.com",
+      "port": "3306",
+      "db": "ydlMsejrI5",
+
+      "type": "MySQL",
+      "local": false
+    }
+  }
+
+
+}
