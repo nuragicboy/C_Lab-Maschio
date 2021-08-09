@@ -131,3 +131,11 @@ dmypy.json
 #idea
 .idea
 .idea/
+/app.7z
+/app/Test/michelet1readExcel.xlsx
+/app/Test/michelet2transpose.xlsx
+/app/Test/michelet3drop.xlsx
+/app/Test/michelet4header.xlsx
+/app/Test/michelet5delColByName.xlsx
+/app/Test/michelet6renameColumn.xlsx
+/Vini_Finit#2.xlsx
