@@ -1,7 +1,7 @@
 import pandas as pd
 
-def readFile(file, sheet="Sheet1"):
-    return pd.read_excel(file, sheet_name=sheet)
+def readFile(file, sheet=0, header=0):
+    return pd.read_excel(file, sheet_name=sheet, header=header)
 
 def transpose(file):
     return file.T
@@ -23,8 +23,22 @@ def renameHeaderByIndex(file, index, newValues):
         file.columns.values[int(index[i])] = newValues[i]
     return file
 
+def renameHeader(file, dict):
+    return file.rename(columns=dict)
+
+"""
+def renameHeader(file, oldNames, newNames):
+    pairings=dict(zip(oldNames, newNames))
+    file.rename(columns=pairings)
+    return file
+"""
+
 def writeLocal(file, name, path="", header=True):
     file.to_excel(path+name, header=header)
 
 def toXMLString(file):
     return file.to_json(orient='records')
+
+def addStaticColumn(file, column, value):
+    file[column]=value
+    print(file)

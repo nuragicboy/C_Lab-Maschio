@@ -7,24 +7,36 @@ class MySQLConnector:
     def __init__(self, conn):
         self.conn = conn
 
+    def connect(self):
+        return mysql.connector.connect(user=self.conn["user"], password=self.conn["password"], host=self.conn["host"],
+                                                  port=self.conn["port"],database=self.conn["db"],
+                                             ssl_ca=self.conn["CA_cert"] if self.conn["CA_required"]== True else None)
+
+    def select(self,query):
+        connection = self.connect()
+        cursor = connection.cursor()
+        cursor.execute(query)
+        myresult = cursor.fetchall()
+        cursor.close()
+        connection.close()
+        return myresult
 
 
     def insertTable(self, data, table):
 
-        connection = mysql.connector.connect(user=self.conn["user"], password=self.conn["password"], host=self.conn["host"],
-                                                  port=self.conn["port"],database=self.conn["db"])
+        connection = self.connect()
         cursor = connection.cursor()
 
-        query = "INSERT INTO " + table + " VALUES (%s, %s, %s,\"" + datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S') +"\")"
+        executionTime=datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+        query = "INSERT INTO " + table + "(codice,campo,valore,dataora)  VALUES (%s, %s, %s, %s)"
         values=[]
+        data.reset_index(drop=True, inplace=True)
         for column in data:
             c=0
             for row in data[column]:
-                values.append((str(data["Codice"][c]),str(column),str(row) if str(row)!="nan" else ""))
-                #query += "insert into " + table + " values (\"" + str(data["Codice"][c]) + "\",\"" + str(column) + "\"," + ("\""+str(
-                #    row)+"\"" if str(row)!="nan" else "\"\"") + "," + now.strftime('%Y-%m-%d %H:%M:%S') + ");\n"
+                if(str(row)!="nan"):
+                    values.append((str(data["Codice"][c]),str(column),str(row),str(executionTime)))
                 c+=1
-        #print(query)
 
         cursor.executemany(query, values)
         connection.commit()

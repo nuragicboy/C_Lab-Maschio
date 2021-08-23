@@ -1,0 +1,268 @@
+
+
+################################################################dizionario analisi########
+
+
+drop table if exists dizionario;
+set sql_require_primary_key = off;
+CREATE TABLE "dizionario" (
+  "lab" varchar(32) NOT NULL,
+  "campo_lab" varchar(256) NOT NULL,
+  "um_lab" varchar(32) DEFAULT NULL,
+  "campo_interno" varchar(256) NOT NULL,
+  "um_interno" varchar(32) DEFAULT NULL,
+  UNIQUE KEY ("lab","campo_lab","um_lab")
+);
+
+
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC) Titolo alcol. volum.eff@% vol','% vol','Titolo alcolometrico effettivo','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC) densità relativa a 20 °C',' ','Densità relativa','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC) Massa volumica','g/ml','Massa volumica','g/ml');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','densità distillato idroalcolico d 20/20',' ','Densità distillato idroalcolico',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC) Zuccheri riduttori@g/l','g/l','Zuccheri riduttori','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC) Titolo alcol. vol. totale@% vol','% vol','Titolo alcolometrico totale','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Acidità volatile@g/l','g/l','Acidità volatile (in acido acetico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Acidità totale@g/l','g/l','Acidità totale (in acido tartarico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Anidride solforosa totale@mg/l','mg/l','Anidride solforosa totale','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Anidride solforosa libera@mg/l','mg/l','Anidride solforosa libera','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Estratto secco totale@g/l','g/l','Estratto secco totale ','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Estratto secco netto@g/l','g/l','Estratto secco netto ','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)pH','','pH','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Sodio@mg/l','mg/l','Sodio ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Ferro ricerca@mg/l','mg/l','Ferro','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Calcio@mg/l','mg/l','Calcio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Ceneri@g/l','g/l','Ceneri','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Alcalinità delle ceneri@meq/l','meq/l','Alcalinità delle ceneri','meq/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Alcol metilico','','Alcol metilico','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Metanolo vini@ml%ml','ml%ml','Alcool metilico','ml%ml A.C.');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Rame@mg/l','mg/l','Rame ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Piombo@mg/l','mg/l','Piombo','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Solfati@mg/l','mg/l','Solfati','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Cloruri@mg/l','mg/l','Cloruri','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC)Zinco@mg/l','mg/l','Zinco','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','(ACC) Litio@ugl (naturale)','ug/l','Litio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Anidride carbonica CEE@g/l','g/l','Anidride carbonica','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Fosfati@mg/l','mg/l','Fosfati ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Magnesio@mg/l','mg/l','Magnesio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Enochimico','Nitrati@mg/l','mg/l','Nitrati ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','titolo alcolometrico volumico',' ','Titolo alcolometrico effettivo','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','Glucosio + Fruttosio Y15',' ','Zuccheri riduttori','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acidità volatile, in acido acetico, g/l','g/l','Acidità volatile (in acido acetico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acidità totale, in acido tartarico, g/l','g/l','Acidità totale (in acido tartarico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','ph','','pH','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','ICP - ferro',' ','Ferro','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','ICP - calcio mg/l','mg/l','Calcio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','ICP - rame mg/l','mg/l','Rame ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','ICP - piombo',' ','Piombo','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','ICP - zinco',' ','Zinco','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','ICP - litio','','Litio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acido l(-) malico g/l','g/l','Acido malico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acido tartarico g/l','g/l','Acido tartarico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','potassio g/l','g/l','Potassio','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','Acetaldeide enzimatico mg/l','mg/l','Acetaldeide enzimatico mg/l','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','intensità colorante rossi A420+520+620',' ','intensità colorante rossi A420+520+620',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','tonalità  A 420/ A 520',' ','tonalità  A 420/ A 520',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','A 420%','','A 420%','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','A 520%','','A 520%','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','A 620%','','A 620%','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','antociani mg/l','mg/l','antociani mg/l','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','forma dello spettro',' ','forma dello spettro',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','polifenoli totali ultravioletto in acido gallico',' ','polifenoli totali ultravioletto in acido gallico',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','leucoantociani mg/l','mg/l','leucoantociani mg/l','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','catechine mg/l','mg/l','catechine mg/l','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acido gluconico g/l','g/l','acido gluconico g/l','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','intensità colorante bianchi A 420',' ','intensità colorante bianchi A 420',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','Azoto prontamente assimilabile enzimatico',' ','Azoto prontamente assimilabile enzimatico',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','Azoto ammoniacale enzimatico',' ','Azoto ammoniacale enzimatico',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','Azoto alfa-amminico enzimatico',' ','Azoto alfa-amminico enzimatico',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','bentonite minima da aggiungere g/hl','g/hl','bentonite minima da aggiungere g/hl','g/hl');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','titolo alcolometrico FTIR',' ','titolo alcolometrico FTIR',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','zuccheri riduttori FTIR',' ','zuccheri riduttori FTIR',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acidità totale FTIR',' ','acidità totale FTIR',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','pH ad equilibrio raggiunto sec. Ridomi',' ','pH ad equilibrio raggiunto sec. Ridomi',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','potassio max secondo Usseglio-Tomasset g/l','g/l','potassio max secondo Usseglio-Tomasset g/l','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acido tartarico libero',' ','acido tartarico libero',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acido tartarico aggiunto',' ','acido tartarico aggiunto',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','prodotto di concentrazione',' ','prodotto di concentrazione',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','acido tartarico aggiungibile secondo Ridomi g/hl','g/hl','acido tartarico aggiungibile secondo Ridomi g/hl','g/hl');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','temperatura di saturazione richiesta °C','°C','temperatura di saturazione richiesta °C','°C');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','temperatura di saturazione attuale °C','°C','temperatura di saturazione attuale °C','°C');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','calcio limite max sec. Ridomi mg/l','mg/l','calcio limite max sec. Ridomi mg/l','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','potassio ad equilibrio raggiunto sec. Ridomi g/l','g/l','potassio ad equilibrio raggiunto sec. Ridomi g/l','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','giudizio stabilità Usseglio-Tomasset',' ','giudizio stabilità Usseglio-Tomasset',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','giudizio stabilità Ridomi',' ','giudizio stabilità Ridomi',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Michelet','decremento acidità totale sec. Ridomi g/l','g/l','decremento acidità totale sec. Ridomi g/l','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Alcool eff.','%/Vol','Titolo alcolometrico effettivo','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Massa Volumica','g/ml','Massa volumica','g/ml');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Zuccheri Rid.','g/l','Zuccheri riduttori','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Alcool Compl.','%/Vol','Titolo alcolometrico totale','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Acidità Volatile','g/l','Acidità volatile (in acido acetico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Acidità Totale','g/l','Acidità totale (in acido tartarico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','SO2 Totale','mg/l','Anidride solforosa totale','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','SO2 Libera','mg/l','Anidride solforosa libera','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','pH','','pH','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Ferro','mg/l','Ferro','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Calcio','mg/l','Calcio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Ceneri','g/l','Ceneri','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Alcalinità Ceneri','meq/l','Alcalinità delle ceneri','meq/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Alcool Metilico','ml%ml A.C.','Alcool metilico','ml%ml A.C.');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Rame','mg/l','Rame ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Piombo','mg/l','Piombo','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Solfati','g/l','Solfati','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Cloruri','g/l','Cloruri','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Zinco','mg/l','Zinco','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','in ione fosfato','mg/l','Fosfati ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','in ione nitrato','mg/l','Nitrati ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Pressione Afrom','bar','Sovrapressione a 20°C','bar');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Acido Malico','g/l','Acido malico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Acido Lattico','g/l','Acido lattico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Lab interno Maschio','Stabilità proteica',' ','Stabilità proteica','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Titolo alcolometrico volumico effettivo ','ml/100ml','Titolo alcolometrico effettivo','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Titolo alcolometrico massico effettivo ','ml/100 g','Titolo alcolometrico effettivo','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Densità relativa a 20°C','NULL','Densità relativa','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Massa volumica (da tabelle OIV)','g/cm3','Massa volumica','g/ml');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Zuccheri riduttori espressi in zucchero invertito','g/l','Zuccheri riduttori','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Zuccheri (Glucosio e Fruttosio)','g/l','Glucosio e Fruttosio','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Zuccheri riduttori espressi in zucchero invertito (da Tabelle OIV)','g/l','Zuccheri riduttori','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Titolo alcolometrico volumico totale (da calcolo)','ml/100 ml','Titolo alcolometrico totale','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acidità volatile in a.acetico dedotta SO2','g/l','Acidità volatile (in acido acetico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acidità totale','g/l','Acidità totale (in acido tartarico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acidità totale','meq/kg zuccheri','Acidità totale (in acido tartarico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Anidride solforosa totale ','mg/l','Anidride solforosa totale','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Anidride solforosa','mg/kg zuccheri','Anidride solforosa totale','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Estratto secco totale','g/l','Estratto secco totale ','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Estratto ridotto (da calcolo)','g/l','Estratto secco netto ','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','pH','NULL','pH','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Sodio','mg/l','Sodio ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Sodio','mg/kg','Sodio ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Ferro','mg/l','Ferro','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Calcio','mg/l','Calcio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Calcio','mg/kg','Calcio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Ceneri','g/l','Ceneri','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Alcalinità delle ceneri','meq/l','Alcalinità delle ceneri','meq/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Metanolo','mg/l','Alcol metilico','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Metanolo','ml/100 ml A.C.','Alcool metilico','ml%ml A.C.');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Rame','mg/l','Rame ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Piombo','µg/l','Piombo','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Solfati (espressi in solfato di K2SO4)','g/l','Solfati','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Cloruri (espressi in NaCl)','g/l','Cloruri','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Zinco','mg/l','Zinco','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Litio','mg/l','Litio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Fosfati','g/l','Fosfati ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Magnesio','mg/l','Magnesio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Magnesio','mg/kg','Magnesio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Nitrati','mg/l','Nitrati ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido malico ','g/l','Acido malico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido lattico ','g/l','Acido lattico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido citrico ','g/l','Acido citrico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido piruvico ','g/l','Acido piruvico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido tartarico','g/l','Acido tartarico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Potassio','mg/l','Potassio','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Potassio','mg/kg','Potassio','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Titolo alcolometrico volumico potenziale (da tabella)','% v/v','Titolo alcolometrico volumico potenziale (da tabella)','% v/v');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Ocratossina A','µg/l','Ocratossina A','µg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido citrico','g/l','Acido citrico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido lattico','g/l','Acido lattico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido malico','g/l','Acido malico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Acido piruvico','g/l','Acido piruvico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Alcol FOSS','ml/100ml','Alcol FOSS','ml/100ml');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Alluminio','mg/l','Alluminio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Arsenico','µg/l','Arsenico','µg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Berillio','µg/l','Berillio','µg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Boro','mg/l','Boro','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Boscalid','mg/kg','Boscalid','mg/kg');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Cadmio','µg/l','Cadmio','µg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Cromo','µg/l','Cromo','µg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Dimetomorf','mg/kg','Dimetomorf','mg/kg');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Folpet (somma di Folpet e Phthalimide)','mg/kg','Folpet (somma di Folpet e Phthalimide)','mg/kg');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Fosetil-Al (somma di fosetil + acido fosforoso)','mg/kg','Fosetil-Al (somma di fosetil + acido fosforoso)','mg/kg');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Glicerina (glicerolo)','g/l','Glicerina (glicerolo)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Glucosio e Fruttosio','g/l','Glucosio e Fruttosio','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Istamina','mg/l','Istamina','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Manganese','mg/l','Manganese','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Metalaxil e metalaxil-m (somma degli isomeri)','mg/kg','Metalaxil e metalaxil-m (somma degli isomeri)','mg/kg');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Metanolo mg/l stampato','mg/l','Metanolo mg/l stampato','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Molibdeno','µg/l','Molibdeno','µg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Putrescina','mg/l','Putrescina','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Rame su Filtrato 0.45 um(L.R. 0.05 mg/l)','mg/l','Rame su Filtrato 0.45 um(L.R. 0.05 mg/l)','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Rapporto isotopico 180/160 sull\'acqua (d180)','per mille','Rapporto isotopico 180/160 sull\'acqua (d180)','per mille');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Rubidio','mg/l','Rubidio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Solfati (espressi in K2SO4)','g/l','Solfati (espressi in K2SO4)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Stronzio','mg/l','Stronzio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Tiramina','mg/l','Tiramina','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Titolo alcolometrico volumico totale','ml/100ml','Titolo alcolometrico volumico totale','ml/100ml');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Vanadio','µg/l','Vanadio','µg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Zoxamide','mg/kg','Zoxamide','mg/kg');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('UIV','Zuccheri FOSS','g/l','Zuccheri FOSS','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Alcool etilico','%','Titolo alcolometrico effettivo','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Zuccheri riduttori','%','Zuccheri riduttori','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Alcool complessivo','%','Titolo alcolometrico totale','% vol');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ac. Acetico (ac volatile)','g/l','Acidità volatile (in acido acetico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Acidità totale','g/l','Acidità totale (in acido tartarico)','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Anid. Solforosa totale','mg/l','Anidride solforosa totale','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Anid. Solforosa libera','mg/l','Anidride solforosa libera','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','pH','','pH','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ferro','mg/l','Ferro','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Calcio','mg/l','Calcio','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Rame','mg/l','Rame ','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Piombo','µg/l','Piombo','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Solfati in K2SO4','g/l','Solfati','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Zinco','mg/l','Zinco','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Diossido di carbonio (anidride carbonica)','g/l','Anidride carbonica','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Sovrapressione','Bar','Sovrapressione a 20°C','bar');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Sovrapressione','kPa','Sovrapressione a 20°C','bar');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ac. Malico totale','g/l','Acido malico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ac. Lattico','g/l','Acido lattico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Stabilità proteica','','Stabilità proteica','');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ac. Citrico','g/l','Acido citrico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ac. Tartarico totale','g/l','Acido tartarico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Potassio','mg/l','Potassio','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ocratossina A','µg/l','Ocratossina A','µg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ac. Reale (pH) dopo stab.',' ','Ac. Reale (pH) dopo stab.',' ');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Potassio (limite massimo)','mg/l','Potassio (limite massimo)','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Ac. Tartatico addizionab.','g/hl','Ac. Tartatico addizionab.','g/hl');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','T° di saturaz. richiesta','°C','T° di saturaz. richiesta','°C');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','T° di saturaz. attuale','°C','T° di saturaz. attuale','°C');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Calcio (limite massimo)','mg/l','Calcio (limite massimo)','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Potassio dopo stabiliz','mg/l','Potassio dopo stabiliz','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Glucosio','g/l','Glucosio','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Fruttosio','g/l','Fruttosio','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Glicerina','g/l','Glicerina','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Acido piruvico','mg/l','Acido piruvico','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Sost. Polifenoliche','mg/l','Sost. Polifenoliche','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Acido propionico','g/l','Acido propionico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Acido succinico','g/l','Acido succinico','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Acido ascorbico','mg/l','Acido ascorbico','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Acido fumarico','mg/l','Acido fumarico','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Potere ossidante in SO2 ox.','mg/l','Potere ossidante in SO2 ox.','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','Acidità totale dopo stab.','g/l','Acidità totale dopo stab.','g/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','KTH precipitato','mg/l','KTH precipitato','mg/l');
+INSERT INTO dizionario (lab,campo_lab,um_lab,campo_interno,um_interno) values('Polo','An. Solfor. Combinabile','mg/l','An. Solfor. Combinabile','mg/l');
+
+
+
+#######################Denominazioni###################
+
+drop table if exists denominazioni;
+CREATE TABLE "denominazioni" (
+  "denominazione" varchar(256) NOT NULL,
+  "tipo" varchar(256) NOT NULL,
+  Primary Key ("denominazione")
+);
+
+
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('ASSIEME - PROSECCO DOC TREVISO SPUMANTE','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('ATTO A BIOLOGICO IN ELABORAZIONE- CUVEE\' 96','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('BIANCO  IN ELABORAZIONE - PARTITA 20/19','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('DOCG (PRESA SPUMA) - AUTOCLAVE 42 - CUVEE\' 93 - PARTITA 124/18 - 2018 - GLERA CON 15% PINOT GRIGIO,','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('IN ELABORAZIONE ATTO A SPUMANTE BIANCO 2019 - CUVE\'E 130','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('IN FRIZZANTATURA ATTO A PINOT BIANCO IGT VENETO - DICH. LAVORO N. 17','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('MASSA RICEVIMENTI MOSTO PROSECCO DOC TREVISO 2020 RIF R','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('MCR','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('MOSTO ATTO A DOCG','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('PROSECCO DOC IN ELABORAZIONE - AUTOCLAVE 125 - PARTITA 163/18 - CUVEE\' 122','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('PROSECCO DOCG IN ESPORTAZIONE - CUVEE\' 130 PARTITA 175/18','Mosto');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('BIANCO - AUTOCLAVE 39; CUVEE 47','Vino');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('VINO BASE ATTO A PROSECCO DOC BIOLOGICO 2019','Vino');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('VINO BIANCO - ATTO A SPUMANTE BIANCO 2019','Vino');
+INSERT INTO denominazioni(denominazione,tipo) VALUES ('VINO BIANCO - IN ELABORAZIONE ATTO A SPUMANTE PROSECCO DOC 2019 BIOLOGICO - CUVE\'E 22 MASSA 2000 HL','Vino');

@@ -1,56 +1,61 @@
 {
-  "options": {
-    "datasource": "excel",
-    "translateColumns": false,
-    "allowMismatchedColumns": false,
-    "target": "maschio"
+  "Michelet": {
+    "options": {
+      "datasource": "XLS/XLSX",
+      "header": false,
+      "TranslateColumnsBeforeLoading": false,
+      "AllowMismatchedColumns": true,
+      "AddProfileColumn": true,
+      "target": "Maschio"
+    },
+    "steps": [
+      {
+        "action": "readExcel"
+      },
+      {
+        "action": "transpose"
+      },
+      {
+        "action": "drop",
+        "rownum": 1
+      },
+      {
+        "action": "header"
+      },
+      {
+        "action": "translateColumns"
+      },
+      {
+        "action": "delColByName",
+        "columns": [
+          "Attività",
+          "Attività - Matrice",
+          "Descrizione",
+          "Locazione",
+          "Prodotto",
+          "Assegnato",
+          "Stampa"
+        ]
+      }
+    ]
   },
-  "steps": [
-    {
-      "action": "readExcel"
+  "Enochimico": {
+    "options": {
+      "datasource": "XLS/XLSX",
+      "header": true,
+      "TranslateColumnsBeforeLoading": false,
+      "AllowMismatchedColumns": true,
+      "AddProfileColumn": true,
+      "target": "Maschio"
     },
-    {
-      "action": "transpose"
-    },
-    {
-      "action": "drop",
-      "rownum": 1
-    },
-    {
-      "action": "header"
-    },
-    {
-      "action": "delColByName",
-      "columns": [
-        "Attività",
-        "Attività - Matrice",
-        "Descrizione",
-        "Locazione",
-        "Prodotto",
-        "Assegnato",
-        "Stampa"
-      ]
-    },
-    {
-      "action": "renameColumn",
-      "columnNumber": [
-        2,
-        3,
-        4,
-        54,
-        55,
-        58,
-        59
-      ],
-      "newName": [
-        "N Vasca",
-        "N Lotto",
-        "N Partita",
-        "calcio limite max sec Ridomi mg/l",
-        "potassio ad equilibrio raggiunto sec Ridomi g/l",
-        "decremento acidità totale sec Ridomi g/l",
-        "pH ad equilibrio raggiunto sec Ridomi"
-      ]
-    }
-  ]
+    "steps": [
+      {
+        "action": "readExcel"
+      },
+      {
+        "action": "drop",
+        "rownum": 0
+      }
+    ]
+  }
 }

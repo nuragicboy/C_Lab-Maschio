@@ -1,6 +1,6 @@
 {
-  "ProfileFolder": "./Profiles",
-  "Dictionary": "dictionary.json",
+  "Profiles": "./Profiles/Michelet.json",
+  "Auto": "./Profiles/Auto.json",
   "ForceTranslation": true,
   "RemoteConnections": {
     "maschio" : {
@@ -16,6 +16,7 @@
       "host": "127.0.0.1",
       "port": "3306",
       "db": "maschio",
+      "CA_required": false,
 
       "type": "MySQL",
       "local": true
@@ -26,6 +27,19 @@
       "host": "remotemysql.com",
       "port": "3306",
       "db": "ydlMsejrI5",
+      "CA_required": false,
+
+      "type": "MySQL",
+      "local": false
+    },
+    "digitalocean" : {
+      "user": "doadmin",
+      "password": "rdcld8w7jgza2lbd",
+      "host": "clabmaschio-do-user-9708910-0.b.db.ondigitalocean.com",
+      "port": "25060",
+      "db": "maschio",
+      "CA_required": true,
+      "CA_cert": "./ca_do.crt",
 
       "type": "MySQL",
       "local": false
