@@ -16,13 +16,12 @@ if len(sys.argv) < 2:
 
 filePath = sys.argv[1]
 """
-monitor = GmailMonitor()
+#monitor = GmailMonitor()
 selector = ProfileSelector()
 a=True
 while a==True:
-    filePath= monitor.run()
-
-
+    #filePath= monitor.run()
+    filePath=["RDP_UIV mini.csv"]
     for file in filePath:
         orchestrator = Orchestrator(file, selector.auto(file))
         orchestrator.run()

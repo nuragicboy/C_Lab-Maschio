@@ -1,7 +1,11 @@
 import pandas as pd
 
-def readFile(file, sheet=0, header=0):
+def readXLS(file, sheet=0, header=0):
     return pd.read_excel(file, sheet_name=sheet, header=header)
+
+def readCSV(file, header=0, skiprows=0, separator=";", notifyErrors=False):
+
+    return pd.read_csv(file, header=header, sep=separator, skiprows=skiprows, error_bad_lines=notifyErrors, engine='python', encoding='UTF-16')
 
 def transpose(file):
     return file.T
@@ -34,11 +38,17 @@ def renameHeader(file, oldNames, newNames):
 """
 
 def writeLocal(file, name, path="", header=True):
-    file.to_excel(path+name, header=header)
+    file.to_excel(path+name, header=header, merge_cells=False)
 
 def toXMLString(file):
     return file.to_json(orient='records')
 
 def addStaticColumn(file, column, value):
     file[column]=value
-    print(file)
+
+def removeExtraColumns(file, list):
+    print (file.columns.difference(list))
+    print (file.columns.intersection(list))
+    return file[file.columns.intersection(list)]
+
+def removeRowOnRegex(file, column, regex):

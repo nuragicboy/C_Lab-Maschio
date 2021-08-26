@@ -1,11 +1,17 @@
 import datetime
 
 import mysql.connector
+import pandas as pd
+import mysql.connector
+from sqlalchemy import create_engine
+
 
 
 class MySQLConnector:
     def __init__(self, conn):
         self.conn = conn
+        self.sqlalachemyString='mysql+mysqlconnector://'+conn["user"]+":"+conn["password"]+"@"+conn["host"]+":"+conn["port"]+"/"+conn["db"]
+        self.sqlalchemyArgs= {'ssl_ca':conn["CA_cert"]} if self.conn["CA_required"]== True else None
 
     def connect(self):
         return mysql.connector.connect(user=self.conn["user"], password=self.conn["password"], host=self.conn["host"],
@@ -22,7 +28,8 @@ class MySQLConnector:
         return myresult
 
 
-    def insertTable(self, data, table):
+    def insertDynTable(self, data, table):
+
 
         connection = self.connect()
         cursor = connection.cursor()
@@ -43,5 +50,10 @@ class MySQLConnector:
 
         cursor.close()
         connection.close()
+
+    def insertTable(self, data, table):
+
+        engine = create_engine(self.sqlalachemyString, connect_args=self.sqlalchemyArgs, echo=False)
+        data.to_sql(con=engine, name=table, if_exists='append', index=False)
 
 

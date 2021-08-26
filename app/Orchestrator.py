@@ -1,6 +1,7 @@
 import json
 from MySQLConnector import MySQLConnector
-import ExcelXlsHandler as xh
+import PandasHandler as pd
+import datetime
 
 
 class Orchestrator:
@@ -22,45 +23,69 @@ class Orchestrator:
         for step in self.profile["steps"]:
 
             if (step["action"] == "readExcel"):
-                self.excelData = xh.readFile(self.dataPath)
+                self.excelData = pd.readXLS(self.dataPath)
+
+            if (step["action"] == "readCSV"):
+                self.excelData = pd.readCSV(self.dataPath)
 
             elif (step["action"] == "translateColumns"):
                 self.excelData = self.translateColumns()
 
             elif (step["action"] == "transpose"):
-                self.excelData = xh.transpose(self.excelData)
+                self.excelData = pd.transpose(self.excelData)
 
             elif (step["action"] == "drop"):
-                self.excelData = xh.dropRowByIndex(self.excelData, int(step["rownum"]))
+                self.excelData = pd.dropRowByIndex(self.excelData, int(step["rownum"]))
 
             elif (step["action"] == "header"):
-                self.excelData = xh.setFirstRowAsHeader(self.excelData)
+                self.excelData = pd.setFirstRowAsHeader(self.excelData)
 
             elif (step["action"] == "delColByName"):
-                self.excelData = xh.dropColumnsByName(self.excelData, step["columns"])
+                self.excelData = pd.dropColumnsByName(self.excelData, step["columns"])
 
             elif (step["action"] == "renameColumn"):
-                self.excelData = xh.renameHeaderByIndex(self.excelData, step["columnNumber"], step["newName"])
+                self.excelData = pd.renameHeaderByIndex(self.excelData, step["columnNumber"], step["newName"])
+
+            elif (step["action"] == "removeRowOnRegex"):
+                self.excelData = pd.renameHeaderByIndex(self.excelData, step["columnNumber"], step["newName"])
+
             else:
                 print("oops")
 
             test += 1
 
-            xh.writeLocal(self.excelData, self.profileName + str(test) + str(step["action"]) + ".xlsx", "Test/",header=True)
+            pd.writeLocal(self.excelData, self.profileName + str(test) + str(step["action"]) + ".xlsx", "Test/",header=True)
 
         if self.profile["options"]["TranslateColumnsBeforeLoading"] == True:
             self.translateColumns()
 
         if self.profile["options"]["AddProfileColumn"] == True:
-            xh.addStaticColumn(self.excelData,"Laboratorio",self.profileName)
+            pd.addStaticColumn(self.excelData,self.profile["options"]["ProfileColumn"],self.profileName)
+
+        if self.profile["options"]["AddTimestamp"] == True:
+            print("entro")
+            timestamp=datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+            pd.addStaticColumn(self.excelData,self.profile["options"]["TimestampColumn"],timestamp)
+
+        if self.profile["options"]["AllowMismatchedColumns"] == False:
+            self.excelData=self.translateColumns()
+            self.excelData=self.removeExtraColumns()
 
         self.dab.insertTable(self.excelData, "analisi")
 
     def translateColumns(self):
-        query="select campo_lab,campo_interno from dizionario where lab='"+self.profileName+"'"
+        query="select campo_lab,campo_interno from dizionario where lab in ('"+self.profileName+"','all')"
+        print(query)
         results=self.dab.select(query)
+        print(results)
         columnNames= {str(row[0]): str(row[1]) for row in results}
-        return xh.renameHeader(self.excelData, columnNames)
+        return pd.renameHeader(self.excelData, columnNames)
+
+    def removeExtraColumns(self):
+        query="select campo_interno from dizionario where lab in ('"+self.profileName+"','all')"
+        results=self.dab.select(query)
+        columnNames= {str(row[0]) for row in results}
+        return pd.removeExtraColumns(self.excelData, columnNames)
 
 """
         for key in dict:

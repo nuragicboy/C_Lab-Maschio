@@ -1,4 +1,6 @@
-import ExcelXlsHandler as xh
+import os
+
+import PandasHandler as pd
 import re
 import json
 
@@ -11,7 +13,19 @@ class ProfileSelector:
             self.profile = json.load(f)
 
     def auto(self,file):
-        data = xh.readFile(file, header=None)
+        ext=os.path.splitext(file)[1].upper()
+        print(ext)
+        datatype=None
+        data=None
+        if(ext in {".XLS",".XLSX"}):
+            datatype="xls//xlsx"
+            print(datatype)
+            data = pd.readXLS(file, header=None)
+        elif(ext==".CSV"):
+            datatype = "csv"
+            data = pd.readCSV(file, header=None, skiprows=1)
+        else:
+            print("formato non valido")
         for profile in self.profile["auto"]:
             for check in profile["check"]:
 
