@@ -87,7 +87,7 @@
       {
         "action": "removeRowOnRegex",
         "expression": "^[0-9]{2}VR[0-9]{5}$",
-        "column"
+        "column": "a"
       }
     ]
   }

@@ -50,5 +50,3 @@ def removeExtraColumns(file, list):
     print (file.columns.difference(list))
     print (file.columns.intersection(list))
     return file[file.columns.intersection(list)]
-
-def removeRowOnRegex(file, column, regex):
