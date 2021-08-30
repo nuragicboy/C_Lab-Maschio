@@ -78,16 +78,24 @@
     "steps": [
       {
         "action": "readCSV",
-        "SkipRows": "1"
+        "SkipRows": 1
       },
       {
         "action": "drop",
-        "rownum": 1
+        "rownum": 0
       },
       {
-        "action": "removeRowOnRegex",
-        "expression": "^[0-9]{2}VR[0-9]{5}$",
-        "column": "a"
+        "action": "delColByName",
+        "columns": [
+          "incertezza",
+          "um",
+          "metodo",
+          "L_INF2",
+          "L_SUP2"
+        ]
+      },
+      {
+        "action": "test"
       }
     ]
   }

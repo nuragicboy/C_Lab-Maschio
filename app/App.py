@@ -21,7 +21,7 @@ selector = ProfileSelector()
 a=True
 while a==True:
     #filePath= monitor.run()
-    filePath=["Michelet.XLSX"]
+    filePath=["RDP_UIV mini.csv"]
     for file in filePath:
         orchestrator = Orchestrator(file, selector.auto(file))
         orchestrator.run()

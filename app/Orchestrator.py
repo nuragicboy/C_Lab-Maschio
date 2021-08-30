@@ -26,7 +26,7 @@ class Orchestrator:
                 self.excelData = pd.readXLS(self.dataPath)
 
             if (step["action"] == "readCSV"):
-                self.excelData = pd.readCSV(self.dataPath)
+                self.excelData = pd.readCSV(self.dataPath, skiprows=step["SkipRows"])
 
             elif (step["action"] == "translateColumns"):
                 self.excelData = self.translateColumns()
@@ -46,8 +46,11 @@ class Orchestrator:
             elif (step["action"] == "renameColumn"):
                 self.excelData = pd.renameHeaderByIndex(self.excelData, step["columnNumber"], step["newName"])
 
-            elif (step["action"] == "removeRowOnRegex"):
-                self.excelData = pd.renameHeaderByIndex(self.excelData, step["columnNumber"], step["newName"])
+           # elif (step["action"] == "removeRowOnRegex"):
+            #    self.excelData = pd.renameHeaderByIndex(self.excelData, step["columnNumber"], step["newName"])
+
+            elif (step["action"] == "test"):
+                self.excelData = pd.test(self.excelData)
 
             else:
                 print("oops")
@@ -71,7 +74,7 @@ class Orchestrator:
             self.excelData=self.translateColumns()
             self.excelData=self.removeExtraColumns()
 
-        self.dab.insertTable(self.excelData, "analisi")
+        #self.dab.insertTable(self.excelData, "analisi")
 
     def translateColumns(self):
         query="select campo_lab,campo_interno from dizionario where lab in ('"+self.profileName+"','all')"
@@ -86,6 +89,9 @@ class Orchestrator:
         results=self.dab.select(query)
         columnNames= {str(row[0]) for row in results}
         return pd.removeExtraColumns(self.excelData, columnNames)
+
+    def test(self):
+        print("sono dentro")
 
 """
         for key in dict:

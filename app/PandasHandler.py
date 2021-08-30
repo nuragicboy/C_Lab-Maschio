@@ -1,4 +1,5 @@
 import pandas as pd
+import re
 
 def readXLS(file, sheet=0, header=0):
     return pd.read_excel(file, sheet_name=sheet, header=header)
@@ -44,9 +45,39 @@ def toXMLString(file):
     return file.to_json(orient='records')
 
 def addStaticColumn(file, column, value):
-    file[column]=value
+    for col in column:
+        file[column]=value
+    return file
 
 def removeExtraColumns(file, list):
     print (file.columns.difference(list))
     print (file.columns.intersection(list))
     return file[file.columns.intersection(list)]
+
+def test(file):
+    rex=re.compile("^[0-9]{2}VR[0-9]{5}$")
+    file.dropna()
+    m = ~file['rdp'].str.contains("^[0-9]{2}VR[0-9]{5}$")
+    writeLocal(file[m], "aggsssssColonne"".xlsx", "Test/", header=True)
+    file = file.drop(file[rex.match(str(file.rdp))].index)
+    colonne = list(dict.fromkeys(file["prova"]))
+    print(colonne)
+    file=addStaticColumn(file, colonne, None)
+
+    newFile = file.copy()
+    dropColumnsByName(newFile, ["prova","valore"])
+    newFile=newFile.drop_duplicates()
+
+    newFile.set_index("rdp")
+    writeLocal(file, "aggColonne"".xlsx", "Test/", header=True)
+
+    for index, row in file.iterrows():
+        newFile.loc[newFile['rdp'] == row['rdp'], newFile[row["prova"]]]= row["valore"]
+
+
+    writeLocal(file, "messo valore"".xlsx", "Test/", header=True)
+
+    writeLocal(newFile, "nodup"".xlsx", "Test/", header=True)
+
+
+    return file
