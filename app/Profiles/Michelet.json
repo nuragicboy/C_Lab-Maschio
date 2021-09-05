@@ -63,7 +63,56 @@
       }
     ]
   },
-  "UIV": {
+    "UIV": {
+    "options": {
+      "datasource": "XLS/XLSX",
+      "header": true,
+      "TranslateColumnsBeforeLoading": false,
+      "AllowMismatchedColumns": false,
+      "AddProfileColumn": true,
+      "ProfileColumn": "Laboratorio",
+      "AddTimestamp": true,
+      "TimestampColumn": "Data Inserimento",
+      "target": "Maschio"
+    },
+    "steps": [
+      {
+        "action": "readExcel"
+      },
+      {
+        "action": "removeDBDuplicates",
+        "DBColumn": "Codice Laboratorio",
+        "dataColumn":"RDP"
+      },
+      {
+        "action": "delColByName",
+        "columns": [
+          "INCERTEZZA",
+          "UM",
+          "METODO",
+          "L_INF2",
+          "L_SUP2"
+        ]
+      },
+      {
+        "action": "dropNullFromColumn",
+        "columns": [
+          "PROVA"
+        ]
+      },
+      {
+        "action": "transposeKeyValues",
+        "index": "RDP",
+        "keyColumn": "PROVA",
+        "valuesColumn": "VALORE"
+      },
+      {
+        "action": "updateDataFromDB",
+        "column": "CAMPIONE"
+      }
+    ]
+  },
+  "UIV_csv": {
     "options": {
       "datasource": "CSV",
       "header": true,

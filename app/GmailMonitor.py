@@ -6,6 +6,7 @@ class GmailMonitor:
         self.gmail = Gmail()
 
     def run(self):
+        print("mi collego alla mail")
         attachments=[]
         while len(attachments)==0:
             messages = self.gmail.get_unread_inbox()
@@ -18,7 +19,8 @@ class GmailMonitor:
                             attachments.append(attm.filename)
                             attm.save()  # downloads and saves each attachment under it's stored
                                                         # filename. You can download without saving with `attm.download()`
-                    #message.mark_as_read()
+                    message.mark_as_read()
             else:
-                time.sleep(600)
+                print("nessun messaggio con allegati trovato. ritento tra 60 secondi")
+                time.sleep(60)
             return (attachments)

@@ -25,7 +25,7 @@ class Orchestrator:
             if (step["action"] == "readExcel"):
                 self.excelData = pd.readXLS(self.dataPath)
 
-            if (step["action"] == "readCSV"):
+            elif (step["action"] == "readCSV"):
                 self.excelData = pd.readCSV(self.dataPath, skiprows=step["SkipRows"])
 
             elif (step["action"] == "translateColumns"):
@@ -46,14 +46,25 @@ class Orchestrator:
             elif (step["action"] == "renameColumn"):
                 self.excelData = pd.renameHeaderByIndex(self.excelData, step["columnNumber"], step["newName"])
 
-           # elif (step["action"] == "removeRowOnRegex"):
-            #    self.excelData = pd.renameHeaderByIndex(self.excelData, step["columnNumber"], step["newName"])
+            elif (step["action"] == "dropNullFromColumn"):
+                self.excelData = pd.dropNullFromColumn(self.excelData, step["columns"])
 
-            elif (step["action"] == "test"):
-                self.excelData = pd.test(self.excelData)
+            elif (step["action"] == "dropNullFromColumn"):
+                self.excelData = pd.dropNullFromColumn(self.excelData, step["columns"])
+
+            elif (step["action"] == "transposeKeyValues"):
+                self.excelData = pd.transposeKeyValues(self.excelData, step["index"],step["keyColumn"],step["valuesColumn"])
+
+            elif (step["action"] == "removeDBDuplicates"):
+                self.excelData = self.removeDBDuplicates(step)
+
+            elif (step["action"] == "updateDataFromDB"):
+                self.excelData = self.updateDataFromDB(step)
 
             else:
-                print("oops")
+                print("azione "+step["action"]+" inesistente, verificare il profilo e riprovare")
+                exit()
+
 
             test += 1
 
@@ -66,7 +77,6 @@ class Orchestrator:
             pd.addStaticColumn(self.excelData,self.profile["options"]["ProfileColumn"],self.profileName)
 
         if self.profile["options"]["AddTimestamp"] == True:
-            print("entro")
             timestamp=datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
             pd.addStaticColumn(self.excelData,self.profile["options"]["TimestampColumn"],timestamp)
 
@@ -75,14 +85,25 @@ class Orchestrator:
             self.excelData=self.removeExtraColumns()
 
         #self.dab.insertTable(self.excelData, "analisi")
+        print("dati caricati sul db per il file "+self.dataPath)
 
     def translateColumns(self):
         query="select campo_lab,campo_interno from dizionario where lab in ('"+self.profileName+"','all')"
-        print(query)
         results=self.dab.select(query)
-        print(results)
         columnNames= {str(row[0]): str(row[1]) for row in results}
         return pd.renameHeader(self.excelData, columnNames)
+
+    def updateDataFromDB(self,step):
+        query="select denominazione,'nome interno' from denominazioni where Laboratorio in ('"+self.profileName+"','all')"
+        results=self.dab.select(query)
+        dict= {str(row[0]): str(row[1]) for row in results}
+        return pd.updateData(self.excelData, step["column"], dict)
+
+    def removeDBDuplicates(self,step):
+        query="select distinct '"+str(step["DBColumn"])+"' from analisi where Laboratorio ='"+self.profileName+"'"
+        results=self.dab.select(query)
+        keys= {str(row[0]) for row in results}
+        return pd.removeDBDuplicates(self.excelData,step["dataColumn"], keys)
 
     def removeExtraColumns(self):
         query="select campo_interno from dizionario where lab in ('"+self.profileName+"','all')"
@@ -90,8 +111,6 @@ class Orchestrator:
         columnNames= {str(row[0]) for row in results}
         return pd.removeExtraColumns(self.excelData, columnNames)
 
-    def test(self):
-        print("sono dentro")
 
 """
         for key in dict:

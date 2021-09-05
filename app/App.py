@@ -21,12 +21,14 @@ selector = ProfileSelector()
 a=True
 while a==True:
     #filePath= monitor.run()
-    filePath=["RDP_UIV mini.csv"]
+    filePath=["Export UIV mini.xlsx"]
     for file in filePath:
-        orchestrator = Orchestrator(file, selector.auto(file))
-        orchestrator.run()
-        del orchestrator
-
-    print("ora nanna")
+        prof = selector.auto(file)
+        if(prof!=-1):
+            orchestrator = Orchestrator(file, prof)
+            orchestrator.run()
+            del orchestrator
+        else:
+            print("errore: profilo non trovato per il file "+file)
     #time.sleep(600)
     a=False

@@ -31,6 +31,10 @@ def renameHeaderByIndex(file, index, newValues):
 def renameHeader(file, dict):
     return file.rename(columns=dict)
 
+def updateData(file, column, data):
+    file=file[column].map(data).fillna(file[column])
+    writeLocal(file, "testUpdate"".xlsx", "Test/", header=True)
+    return file
 """
 def renameHeader(file, oldNames, newNames):
     pairings=dict(zip(oldNames, newNames))
@@ -50,34 +54,73 @@ def addStaticColumn(file, column, value):
     return file
 
 def removeExtraColumns(file, list):
-    print (file.columns.difference(list))
-    print (file.columns.intersection(list))
+    print ("i seguenti campi non hanno corrispondenze e verranno scartati:\n " + str(file.columns.difference(list)))
+    #print (file.columns.intersection(list))
     return file[file.columns.intersection(list)]
 
-def test(file):
-    rex=re.compile("^[0-9]{2}VR[0-9]{5}$")
-    file.dropna()
-    m = ~file['rdp'].str.contains("^[0-9]{2}VR[0-9]{5}$")
-    writeLocal(file[m], "aggsssssColonne"".xlsx", "Test/", header=True)
-    file = file.drop(file[rex.match(str(file.rdp))].index)
-    colonne = list(dict.fromkeys(file["prova"]))
-    print(colonne)
-    file=addStaticColumn(file, colonne, None)
+def removeDBDuplicates(file,column, keys):
+    return file[~file[column].isin(keys)]
 
+def dropNullFromColumn(file, columns):
+    return file.dropna(subset=columns)
+
+def transposeKeyValues(file, ind, keyColumn, valuesColumn):
+    columns = list(dict.fromkeys(file[keyColumn]))
+    #print(colonne)
+    print(ind)
     newFile = file.copy()
-    dropColumnsByName(newFile, ["prova","valore"])
-    newFile=newFile.drop_duplicates()
 
-    newFile.set_index("rdp")
+    dropColumnsByName(newFile, [keyColumn, valuesColumn])
+    newFile = newFile.drop_duplicates()
+    newFile = addStaticColumn(newFile, columns, None)
+
+    newFile.set_index(ind)
     writeLocal(file, "aggColonne"".xlsx", "Test/", header=True)
 
     for index, row in file.iterrows():
-        newFile.loc[newFile['rdp'] == row['rdp'], newFile[row["prova"]]]= row["valore"]
+        """
+        print(ind)
+        print(newFile[ind])
+        print("\n")
+        print(row[keyColumn])
+        print("\n")
+        print(newFile[str(row[keyColumn])])
+        print("\n\n\n\n\n")
+        """
+        newFile.loc[newFile[ind] == row[ind], row[keyColumn]] = row[valuesColumn]
+    return newFile
+
+def test(file):
 
 
-    writeLocal(file, "messo valore"".xlsx", "Test/", header=True)
+    #droppo i valori null nella colonna x
+    file=dropNullFromColumn(file,['PROVA'])
 
-    writeLocal(newFile, "nodup"".xlsx", "Test/", header=True)
+    #trasporto i valori di colonna x come colonne e li valorizzo con i valori di colonna y in base ai valori di colonna z
+    file=transposeKeyValues(file,'RDP','PROVA','VALORE')
+    """    
+    colonne = list(dict.fromkeys(file["PROVA"]))
+    print(colonne)
+
+    newFile = file.copy()
+
+    dropColumnsByName(newFile, ["PROVA","VALORE"])
+    newFile=newFile.drop_duplicates()
+    newFile=addStaticColumn(newFile, colonne, None)
+
+    newFile.set_index("RDP")
+    writeLocal(file, "aggColonne"".xlsx", "Test/", header=True)
 
 
+    for index, row in file.iterrows():
+        print(newFile['RDP'])
+        print("\n")
+        print(row["PROVA"])
+        print("\n")
+        print(newFile[str(row["PROVA"])])
+        print("\n\n\n\n\n")
+        newFile.loc[newFile['RDP'] == row['RDP'], row["PROVA"]] = row["VALORE"]
+
+    """
+    writeLocal(file, "definitivo"".xlsx", "Test/", header=True)
     return file
