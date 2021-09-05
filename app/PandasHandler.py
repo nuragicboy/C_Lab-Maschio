@@ -29,10 +29,16 @@ def renameHeaderByIndex(file, index, newValues):
     return file
 
 def renameHeader(file, dict):
+    print(type(file))
+    writeLocal(file, "BUGO"".xlsx", "Test/", header=True)
     return file.rename(columns=dict)
 
 def updateData(file, column, data):
-    file=file[column].map(data).fillna(file[column])
+    print(file)
+    print(data)
+    writeLocal(file, "testUpdate"".xlsx", "Test/", header=True)
+    file[column].replace(data, inplace=True)
+    print(file)
     writeLocal(file, "testUpdate"".xlsx", "Test/", header=True)
     return file
 """
@@ -54,11 +60,25 @@ def addStaticColumn(file, column, value):
     return file
 
 def removeExtraColumns(file, list):
-    print ("i seguenti campi non hanno corrispondenze e verranno scartati:\n " + str(file.columns.difference(list)))
+    print ("i seguenti campi non hanno corrispondenze e verranno scartati:\n ")
+    print(file.columns.difference(list))
     #print (file.columns.intersection(list))
     return file[file.columns.intersection(list)]
 
+def fill(file,keys,columns):
+    file[columns] = file.groupby(keys, sort=False)[columns].apply(lambda x: x.ffill().bfill())
+    return file
+
 def removeDBDuplicates(file,column, keys):
+    print(keys)
+    print("\n")
+    print(file[column])
+    print("\n")
+    print(file[column].isin(keys))
+    print("\n")
+    print(file[~file[column].isin(keys)])
+    print("\n")
+    print("\n")
     return file[~file[column].isin(keys)]
 
 def dropNullFromColumn(file, columns):

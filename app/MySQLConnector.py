@@ -57,3 +57,4 @@ class MySQLConnector:
         data.to_sql(con=engine, name=table, if_exists='append', index=False)
 
 
+

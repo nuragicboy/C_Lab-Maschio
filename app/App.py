@@ -16,12 +16,12 @@ if len(sys.argv) < 2:
 
 filePath = sys.argv[1]
 """
-#monitor = GmailMonitor()
+monitor = GmailMonitor()
 selector = ProfileSelector()
 a=True
 while a==True:
-    #filePath= monitor.run()
-    filePath=["Export UIV mini.xlsx"]
+    filePath= monitor.run()
+    #filePath=["Export UIV mini.xlsx"]
     for file in filePath:
         prof = selector.auto(file)
         if(prof!=-1):

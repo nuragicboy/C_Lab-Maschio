@@ -1,4 +1,7 @@
 import json
+
+import pandas
+
 from MySQLConnector import MySQLConnector
 import PandasHandler as pd
 import datetime
@@ -61,6 +64,9 @@ class Orchestrator:
             elif (step["action"] == "updateDataFromDB"):
                 self.excelData = self.updateDataFromDB(step)
 
+            elif (step["action"] == "fill"):
+                self.excelData = pd.fill(self.excelData, step["keys"],step["columns"])
+
             else:
                 print("azione "+step["action"]+" inesistente, verificare il profilo e riprovare")
                 exit()
@@ -84,8 +90,10 @@ class Orchestrator:
             self.excelData=self.translateColumns()
             self.excelData=self.removeExtraColumns()
 
-        #self.dab.insertTable(self.excelData, "analisi")
-        print("dati caricati sul db per il file "+self.dataPath)
+        if len(self.excelData.index)>0:
+            self.dab.insertTable(self.excelData, "analisi")
+            self.dab.insertTable(pandas.DataFrame({"file":[self.dataPath], "dataora": [datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')]}), "storico")
+            print("dati caricati sul db per il file "+self.dataPath)
 
     def translateColumns(self):
         query="select campo_lab,campo_interno from dizionario where lab in ('"+self.profileName+"','all')"
@@ -94,14 +102,17 @@ class Orchestrator:
         return pd.renameHeader(self.excelData, columnNames)
 
     def updateDataFromDB(self,step):
-        query="select denominazione,'nome interno' from denominazioni where Laboratorio in ('"+self.profileName+"','all')"
+        query="select denominazione,\"nome interno\" from denominazioni where Laboratorio in ('"+self.profileName+"','all')  and (\"nome interno\" is not null AND \"nome interno\" != '')"
+        print(query)
         results=self.dab.select(query)
         dict= {str(row[0]): str(row[1]) for row in results}
         return pd.updateData(self.excelData, step["column"], dict)
 
     def removeDBDuplicates(self,step):
-        query="select distinct '"+str(step["DBColumn"])+"' from analisi where Laboratorio ='"+self.profileName+"'"
+        query="select distinct \""+str(step["DBColumn"])+"\" from analisi where Laboratorio ='"+self.profileName+"'"
+        print(query)
         results=self.dab.select(query)
+        print(results)
         keys= {str(row[0]) for row in results}
         return pd.removeDBDuplicates(self.excelData,step["dataColumn"], keys)
 

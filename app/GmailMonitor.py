@@ -19,7 +19,7 @@ class GmailMonitor:
                             attachments.append(attm.filename)
                             attm.save()  # downloads and saves each attachment under it's stored
                                                         # filename. You can download without saving with `attm.download()`
-                    message.mark_as_read()
+                    #message.mark_as_read()
             else:
                 print("nessun messaggio con allegati trovato. ritento tra 60 secondi")
                 time.sleep(60)

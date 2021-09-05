@@ -26,6 +26,11 @@
         "action": "header"
       },
       {
+        "action": "removeDBDuplicates",
+        "DBColumn": "Codice Laboratorio",
+        "dataColumn":"Codice"
+      },
+      {
         "action": "translateColumns"
       },
       {
@@ -38,6 +43,10 @@
           "Prodotto",
           "Assegnato"
         ]
+      },
+      {
+        "action": "updateDataFromDB",
+        "column": "denominazione"
       }
     ]
   },
@@ -58,8 +67,17 @@
         "action": "readExcel"
       },
       {
+        "action": "removeDBDuplicates",
+        "DBColumn": "Codice Laboratorio",
+        "dataColumn":"Codice"
+      },
+      {
         "action": "drop",
         "rownum": 0
+      },
+      {
+        "action": "updateDataFromDB",
+        "column": "Natura del prodotto"
       }
     ]
   },
@@ -87,6 +105,7 @@
       {
         "action": "delColByName",
         "columns": [
+          "PACCHETTO",
           "INCERTEZZA",
           "UM",
           "METODO",
@@ -98,6 +117,18 @@
         "action": "dropNullFromColumn",
         "columns": [
           "PROVA"
+        ]
+      },
+      {
+        "action": "fill",
+        "keys": [
+          "RDP"
+        ],
+        "columns": [
+          "RIFERIMENTO",
+          "LOTTO",
+          "CONTROPARTE",
+          "DOCO"
         ]
       },
       {
