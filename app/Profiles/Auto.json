@@ -49,6 +49,27 @@
       ]
     },
     {
+      "ProfileName": "Interno",
+      "DataType": "XLS/XLSX",
+      "Condition": "any",
+      "check": [
+        {
+          "action": "checkMail",
+          "email": ""
+        },
+        {
+          "action": "regex",
+          "cell": [0,3],
+          "expression": "^[0-9]{2}MA[0-9]{5}$"
+        },
+        {
+          "action": "regex",
+          "cell": [0,1],
+          "expression": "^Qt$"
+        }
+      ]
+    },
+    {
       "ProfileName": "UIV_csv",
       "DataType": "CSV",
       "SkipRows": "1",

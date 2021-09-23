@@ -1,7 +1,17 @@
 {
   "Profiles": "./Profiles/Michelet.json",
   "Auto": "./Profiles/Auto.json",
-  "ForceTranslation": true,
+  "DataEmail": "analisiGmail",
+  "AlertEmail": "analisiGmail",
+  "Email": {
+    "analisiGmail": {
+      "host":"imap.gmail.com",
+      "address": "clabmaschio@gmail.com",
+      "password": "cantinemaschio",
+      "smtp-host": "smtp.gmail.com",
+      "smtp-port": 587
+    }
+  },
   "RemoteConnections": {
     "maschio" : {
       "connectionString": "mongodb+srv://unza:pass@maschio.enbsn.mongodb.net/",

@@ -3,8 +3,9 @@
     "options": {
       "datasource": "XLS/XLSX",
       "header": false,
-      "TranslateColumnsBeforeLoading": false,
-      "AllowMismatchedColumns": false,
+      "TranslateColumnsBeforeLoading": true,
+      "RemoveExtraColumns": true,
+      "OnMismatchedColumns": "Notify",
       "AddProfileColumn": true,
       "ProfileColumn": "Laboratorio",
       "AddTimestamp": true,
@@ -46,7 +47,12 @@
       },
       {
         "action": "updateDataFromDB",
-        "column": "denominazione"
+        "column": "Denominazione"
+      }
+    ],
+    "analysis": [
+      {
+        "action": "checkRange"
       }
     ]
   },
@@ -54,8 +60,9 @@
     "options": {
       "datasource": "XLS/XLSX",
       "header": true,
-      "TranslateColumnsBeforeLoading": false,
-      "AllowMismatchedColumns": false,
+      "TranslateColumnsBeforeLoading": true,
+      "RemoveExtraColumns": true,
+      "OnMismatchedColumns": "Notify",
       "AddProfileColumn": true,
       "ProfileColumn": "Laboratorio",
       "AddTimestamp": true,
@@ -79,14 +86,20 @@
         "action": "updateDataFromDB",
         "column": "Natura del prodotto"
       }
+    ],
+    "analysis": [
+      {
+        "action": "checkRange"
+      }
     ]
   },
-    "UIV": {
+  "UIV": {
     "options": {
       "datasource": "XLS/XLSX",
       "header": true,
       "TranslateColumnsBeforeLoading": false,
-      "AllowMismatchedColumns": false,
+      "RemoveExtraColumns": true,
+      "OnMismatchedColumns": "Notify",
       "AddProfileColumn": true,
       "ProfileColumn": "Laboratorio",
       "AddTimestamp": true,
@@ -141,8 +154,50 @@
         "action": "updateDataFromDB",
         "column": "CAMPIONE"
       }
+    ],
+      "analysis": [
+      {
+        "action": "checkRange"
+      }
     ]
-  },
+},
+  "Interno": {
+    "options": {
+      "datasource": "XLS/XLSX",
+      "header": true,
+      "TranslateColumnsBeforeLoading": true,
+      "RemoveExtraColumns": true,
+      "OnMismatchedColumns": "Notify",
+      "AddProfileColumn": true,
+      "ProfileColumn": "Laboratorio",
+      "AddTimestamp": true,
+      "TimestampColumn": "Data Inserimento",
+      "target": "Maschio"
+    },
+    "steps": [
+      {
+        "action": "readExcel"
+      },
+      {
+        "action": "drop",
+        "rownum": 0
+      },
+      {
+        "action": "removeDBDuplicates",
+        "DBColumn": "Codice Laboratorio",
+        "dataColumn":"Codice"
+      },
+      {
+        "action": "updateDataFromDB",
+        "column": "Prodotto"
+      }
+    ],
+    "analysis": [
+      {
+        "action": "checkRange"
+      }
+    ]
+},
   "UIV_csv": {
     "options": {
       "datasource": "CSV",

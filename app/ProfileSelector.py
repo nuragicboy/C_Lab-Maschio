@@ -22,8 +22,8 @@ class ProfileSelector:
         elif(ext==".CSV"):
             datatype = "csv"
             data = pd.readCSV(file, header=None, skiprows=1)
-        else:
-            print("formato non valido")
+        #else:
+            #print("formato non valido")
 
         for profile in self.profile["auto"]:
             for check in profile["check"]:
@@ -32,8 +32,19 @@ class ProfileSelector:
                     pass
 
                 elif (check["action"] == "regex"):
+                    temp=data[check["cell"][1]].astype(str)
+                    field=str(temp.iloc[int(check["cell"][0])])
                     p = re.compile(check["expression"])
-                    if p.match(str(data.iloc[int(check["cell"][0]),int(check["cell"][1])])):
+
+                    print(type(field))
+
+                    print(field)
+                    print("21MA01630")
+
+                    if p.search(str("21MA01630")):
+                        print("got ")
+                    if p.search(str(field)):
+                        print("got ti")
                         return profile["ProfileName"]
         return -1
 

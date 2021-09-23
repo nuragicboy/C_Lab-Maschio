@@ -30,8 +30,16 @@ def renameHeaderByIndex(file, index, newValues):
 
 def renameHeader(file, dict):
     print(type(file))
+    print(dict)
     writeLocal(file, "BUGO"".xlsx", "Test/", header=True)
-    return file.rename(columns=dict)
+    print(file['Acidità Totale'])
+    f= file.rename(columns=dict)
+    for key, value in dict.items():
+        if key in file:
+            print("rinomino "+key+ " "+ value)
+            f.rename(columns={key:value}, inplace=True)
+    writeLocal(file, "POSTBUGO"".xlsx", "Test/", header=True)
+    return f
 
 def updateData(file, column, data):
     print(file)
@@ -39,7 +47,7 @@ def updateData(file, column, data):
     writeLocal(file, "testUpdate"".xlsx", "Test/", header=True)
     file[column].replace(data, inplace=True)
     print(file)
-    writeLocal(file, "testUpdate"".xlsx", "Test/", header=True)
+    writeLocal(file, "testUpdate2"".xlsx", "Test/", header=True)
     return file
 """
 def renameHeader(file, oldNames, newNames):
@@ -62,23 +70,24 @@ def addStaticColumn(file, column, value):
 def removeExtraColumns(file, list):
     print ("i seguenti campi non hanno corrispondenze e verranno scartati:\n ")
     print(file.columns.difference(list))
-    #print (file.columns.intersection(list))
-    return file[file.columns.intersection(list)]
+    print (file.columns.intersection(list))
+    return file[file.columns.intersection(list)], file.columns.difference(list)
 
 def fill(file,keys,columns):
-    file[columns] = file.groupby(keys, sort=False)[columns].apply(lambda x: x.ffill().bfill())
+    for column in columns:
+        file[column] = file.groupby(keys, sort=False)[column].apply(lambda x: x.ffill().bfill())
     return file
 
 def removeDBDuplicates(file,column, keys):
-    print(keys)
-    print("\n")
-    print(file[column])
-    print("\n")
-    print(file[column].isin(keys))
-    print("\n")
-    print(file[~file[column].isin(keys)])
-    print("\n")
-    print("\n")
+    #print(keys)
+    #print("\n")
+    #print(file[column])
+    #print("\n")
+    #print(file[column].isin(keys))
+    #print("\n")
+    #print(file[~file[column].isin(keys)])
+    #print("\n")
+    #print("\n")
     return file[~file[column].isin(keys)]
 
 def dropNullFromColumn(file, columns):
@@ -87,7 +96,7 @@ def dropNullFromColumn(file, columns):
 def transposeKeyValues(file, ind, keyColumn, valuesColumn):
     columns = list(dict.fromkeys(file[keyColumn]))
     #print(colonne)
-    print(ind)
+    #print(ind)
     newFile = file.copy()
 
     dropColumnsByName(newFile, [keyColumn, valuesColumn])
@@ -144,3 +153,21 @@ def test(file):
     """
     writeLocal(file, "definitivo"".xlsx", "Test/", header=True)
     return file
+
+def between(file, values):
+    print("sono in between")
+    copy=file.fillna(-1)
+    elapsed=[]
+
+    for v in values:
+        if v[1] in copy.columns:
+            if v[1] not in elapsed:
+                copy[v[1]] = copy[v[1]].astype(str)
+                copy.loc[copy[v[1]].str.contains('<|%'), v[1]] = -1
+                copy[v[1]] = copy[v[1]].astype(float)
+                elapsed.append(v[1])
+
+            rslt_df = copy[(copy['Denominazione'] == v[0]) & ((copy[v[1]]>float(v[2].replace(',','.'))) | (copy[v[1]]<float(v[3].replace(',','.'))))]
+            if not rslt_df.empty:
+                print("ao")
+                print(rslt_df[Codice])

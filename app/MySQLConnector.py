@@ -28,13 +28,12 @@ class MySQLConnector:
         return myresult
 
 
-    def insertDynTable(self, data, table):
+    def insertDynTable(self, data, table,timestamp):
 
 
         connection = self.connect()
         cursor = connection.cursor()
 
-        executionTime=datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
         query = "INSERT INTO " + table + "(codice,campo,valore,dataora)  VALUES (%s, %s, %s, %s)"
         values=[]
         data.reset_index(drop=True, inplace=True)
@@ -42,7 +41,7 @@ class MySQLConnector:
             c=0
             for row in data[column]:
                 if(str(row)!="nan"):
-                    values.append((str(data["Codice"][c]),str(column),str(row),str(executionTime)))
+                    values.append((str(data["Codice"][c]),str(column),str(row),str(timestamp)))
                 c+=1
 
         cursor.executemany(query, values)
