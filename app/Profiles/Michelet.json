@@ -95,9 +95,9 @@
   },
   "UIV": {
     "options": {
-      "datasource": "XLS/XLSX",
+      "datasource": "CSV",
       "header": true,
-      "TranslateColumnsBeforeLoading": false,
+      "TranslateColumnsBeforeLoading": true,
       "RemoveExtraColumns": true,
       "OnMismatchedColumns": "Notify",
       "AddProfileColumn": true,
@@ -108,20 +108,26 @@
     },
     "steps": [
       {
-        "action": "readExcel"
+        "action": "readCSVCharLimit",
+        "columns": 15,
+        "SkipRows": 1
+      },
+      {
+        "action": "drop",
+        "rownum": 0
       },
       {
         "action": "removeDBDuplicates",
         "DBColumn": "Codice Laboratorio",
-        "dataColumn":"RDP"
+        "dataColumn":"rdp"
       },
       {
         "action": "delColByName",
         "columns": [
-          "PACCHETTO",
-          "INCERTEZZA",
-          "UM",
-          "METODO",
+          "pacchetto",
+          "incertezza",
+          "um",
+          "metodo",
           "L_INF2",
           "L_SUP2"
         ]
@@ -129,30 +135,34 @@
       {
         "action": "dropNullFromColumn",
         "columns": [
-          "PROVA"
+          "prova"
         ]
       },
       {
         "action": "fill",
         "keys": [
-          "RDP"
+          "rdp"
         ],
         "columns": [
-          "RIFERIMENTO",
-          "LOTTO",
-          "CONTROPARTE",
-          "DOCO"
+          "riferimento",
+          "lotto",
+          "controparte",
+          "doco"
         ]
       },
       {
+        "action": "takeFirstPerGroup",
+        "column": "rdp"
+      },
+      {
         "action": "transposeKeyValues",
-        "index": "RDP",
-        "keyColumn": "PROVA",
-        "valuesColumn": "VALORE"
+        "index": "rdp",
+        "keyColumn": "prova",
+        "valuesColumn": "valore"
       },
       {
         "action": "updateDataFromDB",
-        "column": "CAMPIONE"
+        "column": "campione"
       }
     ],
       "analysis": [
@@ -185,7 +195,7 @@
       {
         "action": "removeDBDuplicates",
         "DBColumn": "Codice Laboratorio",
-        "dataColumn":"Codice"
+        "dataColumn": "Codice"
       },
       {
         "action": "updateDataFromDB",
@@ -195,42 +205,6 @@
     "analysis": [
       {
         "action": "checkRange"
-      }
-    ]
-},
-  "UIV_csv": {
-    "options": {
-      "datasource": "CSV",
-      "header": true,
-      "TranslateColumnsBeforeLoading": false,
-      "AllowMismatchedColumns": false,
-      "AddProfileColumn": true,
-      "ProfileColumn": "Laboratorio",
-      "AddTimestamp": true,
-      "TimestampColumn": "Data Inserimento",
-      "target": "Maschio"
-    },
-    "steps": [
-      {
-        "action": "readCSV",
-        "SkipRows": 1
-      },
-      {
-        "action": "drop",
-        "rownum": 0
-      },
-      {
-        "action": "delColByName",
-        "columns": [
-          "incertezza",
-          "um",
-          "metodo",
-          "L_INF2",
-          "L_SUP2"
-        ]
-      },
-      {
-        "action": "test"
       }
     ]
   }

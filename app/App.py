@@ -27,7 +27,7 @@ while a==True:
     response= eh.getAttachments(conf["Email"][conf["DataEmail"]])
     if len(response)!=0:
         for data in response:
-            print(response)
+            #print(response)
             prof = selector.auto(data[0])
             if(prof!=-1):
                 orchestrator = Orchestrator(data[0], prof)

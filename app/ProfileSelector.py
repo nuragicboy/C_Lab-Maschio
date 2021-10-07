@@ -36,15 +36,13 @@ class ProfileSelector:
                     field=str(temp.iloc[int(check["cell"][0])])
                     p = re.compile(check["expression"])
 
-                    print(type(field))
+                    #print(type(field))
 
-                    print(field)
-                    print("21MA01630")
+                    #print(field)
+                    #print("21MA01630")
 
-                    if p.search(str("21MA01630")):
-                        print("got ")
                     if p.search(str(field)):
-                        print("got ti")
+                        #print("got ti")
                         return profile["ProfileName"]
         return -1
 
